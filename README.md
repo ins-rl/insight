@@ -1,9 +1,9 @@
 # insight
 Official implementation of the paper "End-to-End Neuro-Symbolic Reinforcement Learning with Textual Explanations" (ICML 2024)
-
+#
 <div align="center">
 
-# INSIGHT: End-to-End Neuro-Symbolic Visual Reinforcement Learning with Language Explanations
+# End-to-End Neuro-Symbolic Reinforcement Learning with Textual Explanations
 
 ### ICML 2024 (Spotlight)
 
@@ -148,7 +148,7 @@ If you find our code implementation helpful for your own research or work, pleas
 
 ```bibtex
 @article{luo2024insight,
-  title={INSIGHT: End-to-End Neuro-Symbolic Visual Reinforcement Learning with Language Explanations},
+  title={End-to-End Neuro-Symbolic Reinforcement Learning with Textual Explanations},
   author={Luo, Lirui and Zhang, Guoxi and Xu, Hongming and Yang, Yaodong and Fang, Cong and Li, Qing},
   journal={ICML},
   year={2024}
