@@ -1,6 +1,4 @@
-# insight
-Official implementation of the paper "End-to-End Neuro-Symbolic Reinforcement Learning with Textual Explanations" (ICML 2024)
-#
+
 <div align="center">
 
 # End-to-End Neuro-Symbolic Reinforcement Learning with Textual Explanations
@@ -86,43 +84,21 @@ The video after.
 # Usage
 
 ## Installation
-Prerequisites:
-* Python==3.9.17
 
 ```bash
 # core dependencies
-pip install -r requirements/requirements.txt
-pip install -r requirements/requirements-atari.txt
-pip install torch==2.0.0+cu117 torchvision==0.15.1+cu117 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/cu117
-pip install git+https://github.com/DLR-RM/stable-baselines3
-git clone https://github.com/metadriverse/metadrive.git
-cd metadrive
-pip install -e .
-pip install -e .[cuda]
-conda install -c nvidia cuda-python
-cd ..
-cd cleanrl
-cd sam_track
-bash script/install.sh
-bash script/download_ckpt.sh
-cd FastSAM
-pip install -r requirements.txt
-pip install git+https://github.com/openai/CLIP.git
+conda env create -f environment.yml
+conda activate insight
+bash ./scripts/install.sh
+# download
+bash ./scripts/download_ckpt.sh
 ```
-
-
-## Download Necessary Ckpts to cleanrl/sam_track/ckpt
-
-[Track Model](https://drive.google.com/file/d/1g4E-F0RPOx9Nd6J7tU9AE1TjsouL4oZq/view)
-
-[FastSAM](https://drive.google.com/file/d/1m1sjY4ihXBU1fZXdQ-Xdj-mDltW-2Rqv/view)
 
 ## Train INSIGHT
 
 To generate dataset, use
 ```bash
-cd ..
-python demo.py --video-name PongNoFrameskip-v4
+bash scripts/dataset_generate.sh
 ```
 To train cnn, use
 ```bash
