@@ -116,7 +116,7 @@ To train metadrive, use
 bash scripts/train_policy_metadrive.sh
 ```
 
-Here is a report for our method: 
+Here is a report for INSIGHT: 
 
 [Report](https://wandb.ai/liruiluo/nsrl-eql/reports/Pong--Vmlldzo4MzgxOTc3)
 
