@@ -26,7 +26,7 @@ from FastSAM.fastsam import FastSAM, FastSAMPrompt
 def parse_args():
     # fmt: off
     parser = argparse.ArgumentParser()
-    parser.add_argument("--video_name", type=str, default="PongNoFrameskip-v4",
+    parser.add_argument("--video-name", type=str, default="PongNoFrameskip-v4",
         help="the id of the environment")
     args = parser.parse_args()
     return args
