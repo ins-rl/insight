@@ -108,7 +108,7 @@ def plot_cors(pred_mask, size, frame):
         
         # Normalizing coordinates by size of the frame for consistent representation
         objs[str(id)] = {
-            "coordinates": [cor[0] / size[0], cor[1] / size[1]], #y from top to down, x from left to right, from 1 to
+            "coordinates": [cor[0] / size[0], cor[1] / size[1]], # y from top to down, x from left to right, from 1 to
             "bounding_box": [x_min / size[1], y_min / size[0], x_max / size[1], y_max / size[0]],
             "rgb_value": mean_rgb_val.tolist()
         }
@@ -119,7 +119,7 @@ def connected_check(remote_masks):
         Separate remote masks
         '''
         # cv2.imshow('Original Merged Mask', (1-masks) * 255)
-        #cv2.waitKey(0)
+        # cv2.waitKey(0)
         unique_ids = np.unique(remote_masks)
         kernel_size = 5 # some some other values
         kernel = np.ones((kernel_size, kernel_size), np.uint8)
@@ -150,17 +150,17 @@ args = parse_args()
 video_name = args.video_name
 io_args = {
     'input_video': f'./assets/{video_name}.mp4',
-    'output_mask_dir': f'./assets/{video_name}_masks', # save pred masks
-    'output_video': f'./assets/{video_name}_seg.mp4', # mask+frame vizualization, mp4 or avi, else the same as input video
-    'output_gif': f'./assets/{video_name}_seg.gif', # mask visualization
+    'output_mask_dir': f'./assets/{video_name}_masks', # Save pred masks
+    'output_video': f'./assets/{video_name}_seg.mp4', # Mask+frame vizualization, mp4 or avi, else the same as input video
+    'output_gif': f'./assets/{video_name}_seg.gif', # Mask visualization
 
-    'output_mask_dir_train': f'./assets/{video_name}_masks_train', # save pred masks
-    'output_video_train': f'./assets/{video_name}_seg_train.mp4', # mask+frame vizualization, mp4 or avi, else the same as input video
-    'output_gif_train': f'./assets/{video_name}_seg_train.gif', # mask visualization
+    'output_mask_dir_train': f'./assets/{video_name}_masks_train', # Save pred masks
+    'output_video_train': f'./assets/{video_name}_seg_train.mp4', # Mask+frame vizualization, mp4 or avi, else the same as input video
+    'output_gif_train': f'./assets/{video_name}_seg_train.gif', # Mask visualization
 
-    'output_mask_dir_test': f'./assets/{video_name}_masks_test', # save pred masks
-    'output_video_test': f'./assets/{video_name}_seg_test.mp4', # mask+frame vizualization, mp4 or avi, else the same as input video
-    'output_gif_test': f'./assets/{video_name}_seg_test.gif', # mask visualization
+    'output_mask_dir_test': f'./assets/{video_name}_masks_test', # Save pred masks
+    'output_video_test': f'./assets/{video_name}_seg_test.mp4', # Mask+frame vizualization, mp4 or avi, else the same as input video
+    'output_gif_test': f'./assets/{video_name}_seg_test.gif', # Mask visualization
 }
 print(io_args)
 
@@ -193,7 +193,7 @@ segtracker_args = {
     'max_area': max_area, # minimal mask area to add a new mask as a new object
     'max_obj_num': 256, # maximal object number to track in a video
     'min_new_obj_iou': 0, # the area of a new object iou should < 0% 
-    'min_new_obj_iou_disconnected': 0.5 # the area of a new object iou for connnected track masks should < 60% 
+    'min_new_obj_iou_disconnected': 0.5 # the area of a new object iou for connnected track masks should < 50% 
 }
 fastsam_args = {
     "model_path":"ckpt/FastSAM.pt",
@@ -312,10 +312,10 @@ with torch.cuda.amp.autocast():
             torch.cuda.empty_cache()
             gc.collect()
             track_mask = segtracker.track(frame)
-            #sometimes we will not find objs
+            # Sometimes we will not find objs
             if seg_mask is None:
                 seg_mask = track_mask
-            # find new objects, and update tracker with new objects
+            # Find new objects, and update tracker with new objects
             new_obj_mask = segtracker.find_new_objs(track_mask,seg_mask)
             overlap = (track_mask>0) & (new_obj_mask>0)
             # In overlapping areas, we retain the ID of track_mask; in non-overlapping areas, if there are new objects in new_obj_mask, we use the ID of new_obj_mask.

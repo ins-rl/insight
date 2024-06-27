@@ -53,7 +53,7 @@ class Constant(BaseFunction):
 
 class Identity(BaseFunction):
     def torch(self, x):
-        return x / self.norm  # ??
+        return x / self.norm 
 
     def tf(self, x):
         return tf.identity(x) / self.norm
@@ -68,7 +68,6 @@ class Identity(BaseFunction):
 class Square(BaseFunction):
     def torch(self, x):
         return torch.where(torch.abs(x) < 1e3, torch.square(x), 0.0) / self.norm
-        # return torch.clamp(torch.square(x) / self.norm,min=0,max=1e6)
 
     def tf(self, x):
         return tf.square(x) / self.norm
@@ -81,8 +80,6 @@ class Square(BaseFunction):
 
 class Sqrt(BaseFunction):
     def torch(self, x):
-        # x = torch.clip(x,-20,20)
-        # return torch.where(torch.abs(x) >1e-8, torch.sqrt(torch.abs(x)) / self.norm, 0.0) / self.norm
         return torch.sqrt(torch.abs(x)+1e-8)
 
     def tf(self, x):
@@ -149,14 +146,11 @@ class Exp(BaseFunction):
 
 class Log(BaseFunction):
     def torch(self, x):
-        x_safe = torch.abs(x) + 1e-8  # 使用绝对值并添加小的正常数
+        x_safe = torch.abs(x) + 1e-8 
         return torch.log(x_safe) / self.norm
-        # return torch.where(torch.abs(x) > 0.001, torch.log(torch.abs(x)), torch.tensor(0.0)) / self.norm
 
     def sp(self, x):
-        # 使用绝对值并添加小的正常数，以确保 log 函数的输入总是正的
         x_safe = sp.Abs(x) + 1e-8
-        # 使用 SymPy 的符号表达式进行对数运算
         return sp.log(x_safe) / self.norm
     
 class Invx(BaseFunction):
@@ -165,13 +159,8 @@ class Invx(BaseFunction):
 
     def torch(self, x):
         return 1/(x+torch.tensor(1e-4))
-        # return torch.divide(x, y+torch.tensor(1e-2)) / self.norm
 
     def sp(self, x):
-        # if sp.Abs(y)>1e-4:
-        #     return x/y
-        # else:
-        #     return 0
         return 1/(x+1e-4) / self.norm
 
 class BaseFunction2:
@@ -227,22 +216,15 @@ class Div(BaseFunction2):
     def __init__(self, norm=1):
         super().__init__(norm=norm)
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        self.epsilon = 1e-8  # 小的正常数，避免除以零
+        self.epsilon = 1e-8 
 
     def torch(self, x, y):
-        # const1 = torch.tensor(1.0)
-        # const1 = const1.to(self.device)
-        # return torch.where(torch.abs(y) > 0.001, torch.divide(x, y), const1) / self.norm
-        #     # 在y接近零时增加稳定性，而不改变其符号
         y_denom = y + self.epsilon * torch.sign(y)
         y_denom = torch.where(y_denom == 0, torch.tensor(self.epsilon, device=y.device), y_denom)
         return torch.div(x, y_denom) / self.norm
-        # return torch.divide(x, y+torch.tensor(1e-2)) / self.norm
 
     def sp(self, x, y):
-        # 为避免除零，给 y 增加一个小的正数 epsilon
         y_denom = y + self.epsilon * sp.Symbol('sign(y)', real=True)
-        # 使用 SymPy 的符号表达式进行除法
         return x / y_denom / self.norm
     
     

@@ -132,14 +132,11 @@ class AgentContinues(nn.Module):
         return self.critic(hidden)
 
     def get_action_and_value(self, x, action=None, threshold=0.8, actor="neural", next_state=None, deterministic=False):
-        import time
-        t = time.time()
         hidden = self.network.encoder(x / 255.0)
         if not next_state is None:
             next_state = self.ego_stste_normalizer(next_state)
         if self.args.ego_state:
             hidden = torch.concat((next_state,hidden),dim=-1)
-        t1 = time.time()
         if actor == "neural":
             action_mean = self.neural_actor(hidden) 
             action_logstd = self.neural_actor_logstd
@@ -149,9 +146,7 @@ class AgentContinues(nn.Module):
             if self.args.ego_state:
                 hidden_state = torch.concat((next_state,coordinates),dim=-1)
             action_mean = self.eql_actor(hidden_state) #* self.eql_inv_temperature
-            t2 = time.time()
             action_logstd = self.eql_actor_logstd
-            print(t1-t,t2-t1)
             
         if action is None:
             if deterministic:
