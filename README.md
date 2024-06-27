@@ -8,7 +8,7 @@
 **[Lirui Luo](https://liruiluo.github.io/), [Guoxi Zhang](https://guoxizhang.com/), [Hongming Xu](), [Yaodong Yang](https://www.yangyaodong.com/), [Cong Fang](https://congfang-ml.github.io/), [Qing li](https://liqing-ustc.github.io/)**
 
 
-| [```Website```](https://liruiluo.github.io/nsrl-vision-pub/) | [```Arxiv```](https://arxiv.org/abs/2403.12451) |
+| [```Website```](https://ins-rl.github.io/) | [```Arxiv```](https://arxiv.org/abs/2403.12451) |
 :------------------------------------------------------:|:-----------------------------------------------:|
 
 <img src="docs/figures/teaser-1.png" width="568">
