@@ -1,0 +1,3 @@
+cleanrl/__pycache__
+cleanrl/agents/__pycache__
+cleanrl/wandb
