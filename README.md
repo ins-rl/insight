@@ -5,7 +5,7 @@
 
 ### ICML 2024 (Spotlight)
 
-**[Lirui Luo](https://liruiluo.github.io/), [Guoxi Zhang](https://guoxizhang.com/), [Hongming Xu](), [Yaodong Yang](https://www.yangyaodong.com/), [Cong Fang](https://congfang-ml.github.io/), [Qing li](https://liqing-ustc.github.io/)**
+**[Lirui Luo](https://liruiluo.github.io/), [Guoxi Zhang](https://guoxizhang.com/), [Hongming Xu](https://sbx126.github.io/), [Yaodong Yang](https://www.yangyaodong.com/), [Cong Fang](https://congfang-ml.github.io/), [Qing li](https://liqing-ustc.github.io/)**
 
 
 | [```Website```](https://ins-rl.github.io/) | [```Arxiv```](https://arxiv.org/abs/2403.12451) |
